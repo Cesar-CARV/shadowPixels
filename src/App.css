@@ -1,0 +1,8 @@
+body{
+    scroll-behavior: smooth;
+}
+
+canvas {
+    background-image: url('./assets/canvasBackground-light.png');
+    background-size: cover;
+}
