@@ -7,10 +7,10 @@ class PixelCanvas {
 
         this.TOOLS = TOOLS;
         this.WIDTHDEFAULT = this.canvas.width < 400 ? this.canvas.width : 400;
-        this.ZOOMLIMIT = 1;
+        this.ZOOMLIMIT = 4;
 
         this.currentTool = tool;
-        this.zoom = this.ZOOMLIMIT; // por defecto es 1 // el zoom que se le aplicara al tamaño del lienzo
+        this.zoom = 1; // por defecto es 1 // el zoom que se le aplicara al tamaño del lienzo
         this.size = 8;
         this.width = this.WIDTHDEFAULT * this.zoom; // tamaño del lienzo 
         this.box = this.width / this.size; // tamaño de los recuadros / pixeles
@@ -25,6 +25,12 @@ class PixelCanvas {
         this.handToolLastPoint = { x: 0, y: 0 };
 
         this.drawBoard();
+    }
+
+    recalculateBox = () => {
+        this.WIDTHDEFAULT = this.canvas.width < 400 ? this.canvas.width : 400;
+        this.width = this.WIDTHDEFAULT * this.zoom; // tamaño del lienzo 
+        this.box = this.width / this.size; // tamaño de los recuadros / pixeles
     }
 
     // updateCursorPoint, esta funcion actualiza la posicion del cursor 
@@ -48,8 +54,8 @@ class PixelCanvas {
     }
 
     zoomBoard = direction => {
-        if (direction < 0) { this.zoom += .1 }
-        else if (direction > 0 && this.zoom > this.ZOOMLIMIT) { this.zoom -= .1 }
+        if (direction < 0 && this.zoom < this.ZOOMLIMIT) { this.zoom += .1 }
+        else if (direction > 0 && this.zoom > 1) { this.zoom -= .1 }
 
         const oldBox = this.box;
         const oldOffsetX = this.offsetPoint.x / oldBox;
@@ -94,12 +100,12 @@ class PixelCanvas {
 
             const moveX = Math.sign(this.cursorPoint.x - this.handToolPoint.x);
             const moveY = Math.sign(this.cursorPoint.y - this.handToolPoint.y);
-            
+
             if (this.cursorPoint.x === this.handToolLastPoint.x && this.cursorPoint.y === this.handToolLastPoint.y) return;
-            
+
             this.offsetPoint.x += moveX * this.box;
             this.offsetPoint.y += moveY * this.box;
-            
+
             this.handToolLastPoint.x = this.cursorPoint.x;
             this.handToolLastPoint.y = this.cursorPoint.y;
         }
@@ -130,8 +136,8 @@ class PixelCanvas {
         }
         this.ctx.fillStyle = 'green';
         this.ctx.fillRect(this.handToolPoint.x * this.box, this.handToolPoint.y * this.box, 4, 4);
-        this.ctx.fillStyle = 'red';
-        this.ctx.fillRect(this.cursorPoint.x * this.box, this.cursorPoint.y * this.box, 4, 4);
+        this.ctx.fillStyle = '#ffffff33';
+        this.ctx.fillRect(this.cursorPoint.x * this.box, this.cursorPoint.y * this.box, this.box, this.box);
     }
 
 

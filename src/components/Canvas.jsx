@@ -10,11 +10,27 @@ function Canvas({ color, tool }) {
     const [pixelCanvas, setPixelCanvas] = useState();
     const [paint, setPaint] = useState(false);
 
+    // crear la clase pixelCanvas
     useEffect(() => {
         const newCtx = canvasRef.current.getContext('2d');
         setPixelCanvas(new PixelCanvas(canvasRef.current, newCtx, tool));
     }, []);
 
+    // modificar el tamaño del canvas y redibujar el board
+    useEffect(() => {
+        if (!pixelCanvas) return;
+
+        const canvasW = canvasRef.current.clientWidth;
+        const canvasH = canvasRef.current.clientHeight;
+
+        canvasRef.current.width = canvasW;
+        canvasRef.current.height = canvasH;
+
+        pixelCanvas.recalculateBox();
+        pixelCanvas.drawBoard();
+    },[paint])
+
+    // cada que se eleccionar una herramienta se actualiza la herramienta en el pixelCanvas
     useEffect(() => {
         if (pixelCanvas) {
             pixelCanvas.updateCurrentTool(tool);
@@ -31,6 +47,7 @@ function Canvas({ color, tool }) {
         pixelCanvas.rezetHandToolPoint();
     }
 
+    //  al mover el mouse calcular la posicion del mouse y dibujar en el board
     const handleMouseMove = e => {
         const x = e.pageX - canvasRef.current.offsetLeft;
         const y = e.pageY - canvasRef.current.offsetTop;
@@ -43,10 +60,7 @@ function Canvas({ color, tool }) {
         }
     }
 
-    const handleResize = () => {
-        pixelCanvas.zoomBoard(0);
-    }
-
+    // desactivar el menu al hacer click derecho
     const handleContextMenu = e => {
         e.preventDefault();
         return false;
@@ -60,10 +74,12 @@ function Canvas({ color, tool }) {
                 onMouseDown={handleMouseDown}
                 onMouseUp={handleMouseUp}
                 onMouseLeave={handleMouseUp}
-                onResize={handleResize}
                 onContextMenu={handleContextMenu}
                 id="canvas"
-                className={`border-2 border-gray-500 rounded-sm 
+                className={`
+                    border-2 border-gray-500 rounded-sm 
+                    object-none object-left-top 
+                    w-full max-w-lg
                     ${currentTool === TOOLS.PEN ? "cursor-cell" : ""}
                     ${currentTool === TOOLS.ERASER ? "cursor-no-drop" : ""}
                     ${currentTool === TOOLS.HAND ? "cursor-move" : ""}
