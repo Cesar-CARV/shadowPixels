@@ -9,7 +9,7 @@ function History({ items, clear, updateColor }) {
     return (
         <section>
             <header>
-                <h3>History</h3>
+                <h3>Color history</h3>
                 <button onClick={handleClearClick}>
                     <i className='bx bxs-x-circle'></i>
                 </button>
@@ -17,7 +17,7 @@ function History({ items, clear, updateColor }) {
             <ul>
                 {history.map((item, i) => (
                     <li key={i}>
-                        <ColorButton color={item} click={handleUpdateColorClick} showHex={true}/>
+                        <ColorButton color={item} click={handleUpdateColorClick} showHex={false}/>
                     </li>
                 ))}
             </ul>

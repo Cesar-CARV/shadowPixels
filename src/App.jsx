@@ -23,7 +23,6 @@ function App() {
   // canvas
   const getBoard = newboard => {
     setBoard(newboard);
-    // console.log(board);
   }
 
   // hitorial
@@ -86,13 +85,13 @@ function App() {
             <ToolButton type={TOOLS.ERASER} active={currentTool === TOOLS.ERASER} cb={() => setCurrentTool(TOOLS.ERASER)} />
             <ToolButton type={TOOLS.HAND} active={currentTool === TOOLS.HAND} cb={() => setCurrentTool(TOOLS.HAND)} />
             <ToolButton type={TOOLS.LENS} active={currentTool === TOOLS.LENS} cb={() => setCurrentTool(TOOLS.LENS)} />
-            <ColorButton color={currentColor} click={() => { }} />
+            <ColorButton color={currentColor} click={() => { }} showHex={true} />
             <input type="color" onChange={handleClickColor} />
           </div>
           
           {/* Form size */}
           <CanvasControls changeSize={changeSize} changeMeasure={changeMeasure}/>
-          <button className="bg-indigo-700 text-white px-4 py-2" onClick={convertBoardToCSs}>print board</button>
+          <button className="bg-indigo-700 text-white px-4 py-2" onClick={convertBoardToCSs}>Get Code</button>
 
           {/* History */}
           <History items={history} clear={clearColorHistory} updateColor={updateCurrentColor} />
