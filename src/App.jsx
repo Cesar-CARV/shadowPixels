@@ -5,9 +5,10 @@ import History from './components/History';
 import ToolButton from './components/ToolButton';
 import ColorButton from './components/ColorButton';
 import CanvasControls from './components/CanvasControls';
-import TOOLS from './utility/Tools';
 import ConvertBoardToCss from './utility/ConverBoarToCss';
 import CodeBlock from './components/CodeBlock';
+import TOOLS from './utility/Tools';
+import MEASURES from './utility/Measures';
 import './App.css';
 
 function App() {
@@ -17,10 +18,7 @@ function App() {
   const [board, setBoard] = useState([]);
   const [sizeBorad, setSizeBoard] = useState(8);
   const [spriteComponent, setSpriteComponent] = useState([]);
-
-  useEffect(()=> {
-    console.log(`${spriteComponent.html}\n${spriteComponent.container}\n${spriteComponent.sprite}`);
-  },[spriteComponent]);
+  const [measure, setMeasure] = useState(MEASURES.REM);
 
   // canvas
   const getBoard = newboard => {
@@ -50,17 +48,21 @@ function App() {
   }
 
   // controles 
-  const onApply = newsize => {
+  const changeSize = newsize => {
     const dialogResult = confirm("¿Seguro de cambiar el tamaño del board?, esto borrara todo lo que este en el");
     if (!dialogResult) return;
 
     setSizeBoard(newsize);
   }
 
+  const changeMeasure = newMeasure => {
+    setMeasure(newMeasure);
+  }
+
   // convertir el board a css
   const convertBoardToCSs = () => {
     const convertBoard = new ConvertBoardToCss(board);
-    const measure = convertBoard.MESURES.EM;
+    // const measure = convertBoard.MESURES.EM;
     const shadowsList = convertBoard.getComponent(measure);
     setSpriteComponent(shadowsList);
   }
@@ -89,7 +91,7 @@ function App() {
           </div>
           
           {/* Form size */}
-          <CanvasControls onApply={onApply} />
+          <CanvasControls changeSize={changeSize} changeMeasure={changeMeasure}/>
           <button className="bg-indigo-700 text-white px-4 py-2" onClick={convertBoardToCSs}>print board</button>
 
           {/* History */}

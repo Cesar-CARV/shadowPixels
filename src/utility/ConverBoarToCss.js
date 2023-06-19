@@ -1,7 +1,9 @@
+import MEASURES from './Measures';
+
 class ConvertBoardToCss {
     constructor(board) {
         this.board = board;
-        this.MESURES = { PX: 'px', REM: 'rem', EM: 'em' };
+        this.MEASURES = MEASURES;
     }
 
     #convertBoardToList = () => {
@@ -19,13 +21,13 @@ class ConvertBoardToCss {
 
     #getShadows = measure => {
         const list = this.#convertBoardToList().filter(pixel => pixel.color !== "transparent");
-        const pxRemEm = measure === this.MESURES.PX ? this.MESURES.PX : measure === this.MESURES.REM ? this.MESURES.REM : this.MESURES.EM;
+        const pxRemEm = measure === this.MEASURES.PX ? this.MEASURES.PX : measure === this.MEASURES.REM ? this.MEASURES.REM : this.MEASURES.EM;
         const shadowsList = list.map((pixel, i) => `${pixel.x + pxRemEm} ${pixel.y + pxRemEm} ${pixel.color}`);
         return shadowsList;
     }
 
     #getSpriteCss = (measure, shadows) => {
-        return `.sprite {\n\twidth: 1${measure};\n\theight: 1${measure};\n\tbackground-color: ${this.board[0][0]};\n\tbox-shadow: ${shadows.join(',')};\n}`;
+        return `.sprite {\n\twidth: 1${measure};\n\theight: 1${measure};\n\tbackground-color: ${this.board[0][0]};\n\tbox-shadow: ${shadows.join(', ')};\n}`;
     }
 
     #getSpriteContainerCss = measure => {

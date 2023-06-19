@@ -1,9 +1,10 @@
 import { useState } from "react";
+import MEASURES from '../utility/Measures';
 
-function CanvasControls({ onApply }) {
-    const callback = onApply;
+function CanvasControls({ changeSize, changeMeasure }) {
     const SIZELIMIT = 32;
     const [sizeValue, setSizeValue] = useState(8);
+    const [measure, setMeasure] = useState(MEASURES.REM);
 
     const handleChange = e => {
         let newValue = e.target.value
@@ -22,27 +23,50 @@ function CanvasControls({ onApply }) {
         if (sizeValue === "") return;
         if (parseInt(sizeValue) === 0) return;
 
-        callback(sizeValue);
+        changeSize(sizeValue, measure);
+    }
+
+    const handleClick = e => {
+        setMeasure(e.target.value);
+        changeMeasure(e.target.value);
     }
 
     return (
-        <form onSubmit={handleSubmit}>
-            <label htmlFor="">
-                <span>Size: </span>
-                <input
-                    type="text"
-                    placeholder='8'
-                    name="size"
-                    maxLength={2}
-                    onChange={handleChange}
-                    value={sizeValue}
-                />
-            </label>
-            <button type="submit">
-                <span>Apply</span>
-                <i className='bx bxs-check-square'></i>
-            </button>
-        </form>
+        <section>
+            <form onSubmit={handleSubmit}>
+                <label htmlFor="">
+                    <span>Size: </span>
+                    <input
+                        type="text"
+                        placeholder='8'
+                        name="size"
+                        maxLength={2}
+                        onChange={handleChange}
+                        value={sizeValue}
+                    />
+                </label>
+                <button type="submit">
+                    <span>Apply</span>
+                    <i className='bx bx-check'></i>
+                </button>
+            </form>
+            <div className="flex gap-4">
+                <p>Measure</p>
+                <label>
+                    <span>REM</span>
+                    <input type="radio" name="measure" value={MEASURES.REM} onClick={handleClick} />
+                </label>
+                <label>
+                    <span>PX</span>
+                    <input type="radio" name="measure" value={MEASURES.PX} onClick={handleClick} />
+                </label>
+                <label>
+                    <span>EM</span>
+                    <input type="radio" name="measure" value={MEASURES.EM} onClick={handleClick} />
+                </label>
+
+            </div>
+        </section>
     )
 }
 

@@ -16,7 +16,7 @@ function CodeBlock({ code, title }) {
             <header className="p-4 flex justify-between items-center bg-gray-900">
                 <h4>{title}</h4>
                 <button onClick={handleClick}>
-                    {copied ? <i class='bx bxs-check-square'></i> : <i class='bx bx-clipboard'></i>}
+                    {copied ? <i className='bx bxs-check-square'></i> : <i className='bx bx-clipboard'></i>}
                 </button>
             </header>
             <div className="p-4">
