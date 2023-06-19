@@ -2,10 +2,12 @@ import { useState, useEffect, useRef } from "react";
 import PixelCanvas from "../utility/PixelCanvas.js";
 import TOOLS from "../utility/Tools.js";
 
-function Canvas({ color, tool }) {
-    const canvasRef = useRef(null);
-    const currentColor = color;
+function Canvas({size, color, tool, getBoard }) {
+    const sizeBoard = size;
     const currentTool = tool;
+    const currentColor = color;
+    const getCanvasBoard = getBoard;
+    const canvasRef = useRef(null);
     const [pointer, setPointer] = useState({ x: 0, y: 0 });
     const [pixelCanvas, setPixelCanvas] = useState();
     const [paint, setPaint] = useState(false);
@@ -13,8 +15,15 @@ function Canvas({ color, tool }) {
     // crear la clase pixelCanvas
     useEffect(() => {
         const newCtx = canvasRef.current.getContext('2d');
-        setPixelCanvas(new PixelCanvas(canvasRef.current, newCtx, tool));
+        setPixelCanvas(new PixelCanvas(canvasRef.current, newCtx, tool, size));
     }, []);
+
+    // modificar el tamaño del board y redibujarlo al cambiar el "sizeBaord"
+    useEffect(() => {
+        if (!pixelCanvas) return;
+
+        pixelCanvas.resizeBoard(sizeBoard);
+    },[sizeBoard]);
 
     // modificar el tamaño del canvas y redibujar el board
     useEffect(() => {
@@ -28,14 +37,17 @@ function Canvas({ color, tool }) {
 
         pixelCanvas.recalculateBox();
         pixelCanvas.drawBoard();
-    },[paint])
+
+        const canvasBoard = pixelCanvas.getBoard();
+        getCanvasBoard(canvasBoard);
+    },[paint]);
 
     // cada que se eleccionar una herramienta se actualiza la herramienta en el pixelCanvas
     useEffect(() => {
         if (pixelCanvas) {
             pixelCanvas.updateCurrentTool(tool);
         }
-    }, [tool])
+    }, [tool]);
 
     const handleMouseDown = e => {
         setPaint(true);

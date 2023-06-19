@@ -1,7 +1,7 @@
 import TOOLS from "./Tools";
 
 class PixelCanvas {
-    constructor(canvas, ctx, tool) {
+    constructor(canvas, ctx, tool, size) {
         this.canvas = canvas;
         this.ctx = ctx;
 
@@ -11,7 +11,8 @@ class PixelCanvas {
 
         this.currentTool = tool;
         this.zoom = 1; // por defecto es 1 // el zoom que se le aplicara al tamaño del lienzo
-        this.size = 8;
+        this.size = size;
+        this.SIZELIMIT = 32;
         this.width = this.WIDTHDEFAULT * this.zoom; // tamaño del lienzo 
         this.box = this.width / this.size; // tamaño de los recuadros / pixeles
 
@@ -26,11 +27,40 @@ class PixelCanvas {
 
         this.drawBoard();
     }
+    
+    getBoard = () => {
+        return this.board;
+    }
+
+    resizeBoard = newSize => {
+        this.size = newSize > this.SIZELIMIT ? this.SIZELIMIT : newSize;
+        this.board = new Array(this.size).fill("a");
+        this.board.forEach((_, i) => this.board[i] = new Array(this.size).fill("#00000000"));
+        this.recalculateBox();
+        this.drawBoard();
+    }
 
     recalculateBox = () => {
         this.WIDTHDEFAULT = this.canvas.width < 400 ? this.canvas.width : 400;
         this.width = this.WIDTHDEFAULT * this.zoom; // tamaño del lienzo 
         this.box = this.width / this.size; // tamaño de los recuadros / pixeles
+    }
+
+    zoomBoard = direction => {
+        if (direction < 0 && this.zoom < this.ZOOMLIMIT) { this.zoom += .1 }
+        else if (direction > 0 && this.zoom > 1) { this.zoom -= .1 }
+
+        const oldBox = this.box;
+        const oldOffsetX = this.offsetPoint.x / oldBox;
+        const oldOffsetY = this.offsetPoint.y / oldBox;
+
+        this.width = this.WIDTHDEFAULT * this.zoom; // tamaño del lienzo
+        this.box = this.width / this.size; // tamaño de los recuadros / pixeles
+
+        this.offsetPoint.x = oldOffsetX * this.box;
+        this.offsetPoint.y = oldOffsetY * this.box;
+
+        this.drawBoard();
     }
 
     // updateCursorPoint, esta funcion actualiza la posicion del cursor 
@@ -51,23 +81,6 @@ class PixelCanvas {
 
     updateCurrentTool = tool => {
         this.currentTool = this.TOOLS[tool];
-    }
-
-    zoomBoard = direction => {
-        if (direction < 0 && this.zoom < this.ZOOMLIMIT) { this.zoom += .1 }
-        else if (direction > 0 && this.zoom > 1) { this.zoom -= .1 }
-
-        const oldBox = this.box;
-        const oldOffsetX = this.offsetPoint.x / oldBox;
-        const oldOffsetY = this.offsetPoint.y / oldBox;
-
-        this.width = this.WIDTHDEFAULT * this.zoom; // tamaño del lienzo
-        this.box = this.width / this.size; // tamaño de los recuadros / pixeles
-
-        this.offsetPoint.x = oldOffsetX * this.box;
-        this.offsetPoint.y = oldOffsetY * this.box;
-
-        this.drawBoard();
     }
 
     rezetHandToolPoint = () => {
@@ -134,13 +147,11 @@ class PixelCanvas {
                 );
             }
         }
-        this.ctx.fillStyle = 'green';
-        this.ctx.fillRect(this.handToolPoint.x * this.box, this.handToolPoint.y * this.box, 4, 4);
-        this.ctx.fillStyle = '#ffffff33';
-        this.ctx.fillRect(this.cursorPoint.x * this.box, this.cursorPoint.y * this.box, this.box, this.box);
+        // this.ctx.fillStyle = 'green';
+        // this.ctx.fillRect(this.handToolPoint.x * this.box, this.handToolPoint.y * this.box, 4, 4);
+        // this.ctx.fillStyle = '#ffffff33';
+        // this.ctx.fillRect(this.cursorPoint.x * this.box, this.cursorPoint.y * this.box, this.box, this.box);
     }
-
-
 
 }
 
