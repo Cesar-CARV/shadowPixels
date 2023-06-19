@@ -19,7 +19,7 @@ class ConvertBoardToCss {
 
     #getShadows = measure => {
         const list = this.#convertBoardToList().filter(pixel => pixel.color !== "transparent");
-        const pxRemEm = measure === 'px' ? 'px' : measure === 'rem' ? 'rem' : 'em';
+        const pxRemEm = measure === this.MESURES.PX ? this.MESURES.PX : measure === this.MESURES.REM ? this.MESURES.REM : this.MESURES.EM;
         const shadowsList = list.map((pixel, i) => `${pixel.x + pxRemEm} ${pixel.y + pxRemEm} ${pixel.color}`);
         return shadowsList;
     }
@@ -29,12 +29,12 @@ class ConvertBoardToCss {
     }
 
     #getSpriteContainerCss = measure => {
-
+        return `position: relative\nwidth: ${this.board.length + measure}\nheight: ${this.board.length + measure}`;
     }
 
     getComponent = measure => {
         const shadows = this.#getShadows(measure);
-        return this.#getSpriteCss(measure, shadows);
+        return [this.#getSpriteContainerCss(measure),this.#getSpriteCss(measure, shadows)];
         // return (`
         //     <>
         //     <>

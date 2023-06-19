@@ -18,7 +18,7 @@ function App() {
   const [spriteComponent, setSpriteComponent] = useState([]);
 
   useEffect(()=> {
-    console.log(spriteComponent);
+    console.log(spriteComponent[0], "\n\n", spriteComponent[1]);
   },[spriteComponent]);
 
   // canvas
