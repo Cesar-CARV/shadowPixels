@@ -60,7 +60,7 @@ function App() {
   // convertir el board a css
   const convertBoardToCSs = () => {
     const convertBoard = new ConvertBoardToCss(board);
-    const measure = convertBoard.MESURES.REM;
+    const measure = convertBoard.MESURES.EM;
     const shadowsList = convertBoard.getComponent(measure);
     setSpriteComponent(shadowsList);
   }
@@ -97,11 +97,11 @@ function App() {
         </aside>
 
         {/* Code css */}
-        <section className='flex flex-wrap gap-4'>
-          <CodeBlock code={spriteComponent.html}/>
-          <CodeBlock code={spriteComponent.container}/>
-          <CodeBlock code={spriteComponent.sprite}/>
-        </section>
+        <article className='flex flex-wrap gap-2'>
+          <CodeBlock code={spriteComponent.html} title={"HMTL"}/>
+          <CodeBlock code={spriteComponent.container} title={"CSS Container"}/>
+          <CodeBlock code={spriteComponent.sprite} title={"CSS Sprite"}/>
+        </article>
       </main>
 
       {/* Footer */}

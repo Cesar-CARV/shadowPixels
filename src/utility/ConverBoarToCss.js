@@ -29,7 +29,7 @@ class ConvertBoardToCss {
     }
 
     #getSpriteContainerCss = measure => {
-        return `.sprite-container {\n\tposition: relative\n\twidth: ${this.board.length + measure}\n\theight: ${this.board.length + measure}\n}`;
+        return `.sprite-container {\n\tposition: relative;\n\twidth: ${this.board.length + measure};\n\theight: ${this.board.length + measure};\n}`;
     }
 
     getComponent = measure => {
@@ -38,7 +38,7 @@ class ConvertBoardToCss {
         }
 
         const shadows = this.#getShadows(measure);
-        const component = `<div class="sprite-container"><div class="sprite"></div></div>`;
+        const component = `<div class="sprite-container">\n\t<div class="sprite">\n\t</div>\n</div>`;
         const classSpriteContainer = this.#getSpriteContainerCss(measure);
         const classSprite = this.#getSpriteCss(measure, shadows);
         return { html: component, container: classSpriteContainer, sprite: classSprite };
