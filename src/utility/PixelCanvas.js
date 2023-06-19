@@ -17,7 +17,7 @@ class PixelCanvas {
         this.box = this.width / this.size; // tamaño de los recuadros / pixeles
 
         this.board = new Array(this.size).fill([]);
-        this.board.forEach((_, i) => this.board[i] = new Array(this.size).fill("#00000000"));
+        this.board.forEach((_, i) => this.board[i] = new Array(this.size).fill("transparent"));
 
         this.offsetPoint = { x: 0, y: 0 };
         this.cursorPoint = { x: 0, y: 0 };
@@ -34,8 +34,8 @@ class PixelCanvas {
 
     resizeBoard = newSize => {
         this.size = newSize > this.SIZELIMIT ? this.SIZELIMIT : newSize;
-        this.board = new Array(this.size).fill("a");
-        this.board.forEach((_, i) => this.board[i] = new Array(this.size).fill("#00000000"));
+        this.board = new Array(this.size).fill([]);
+        this.board.forEach((_, i) => this.board[i] = new Array(this.size).fill("transparent"));
         this.recalculateBox();
         this.drawBoard();
     }
@@ -98,7 +98,7 @@ class PixelCanvas {
             this.board[this.cursorPoint.y][this.cursorPoint.x] = color;
         }
         else if (this.currentTool === this.TOOLS.ERASER) {
-            this.board[this.cursorPoint.y][this.cursorPoint.x] = "#00000000";
+            this.board[this.cursorPoint.y][this.cursorPoint.x] = "transparent";
         }
         else if (this.currentTool === this.TOOLS.LENS) {
             e.preventDefault();

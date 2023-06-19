@@ -6,18 +6,25 @@ import ToolButton from './components/ToolButton';
 import ColorButton from './components/ColorButton';
 import CanvasControls from './components/CanvasControls';
 import TOOLS from './utility/Tools';
+import ConvertBoardToCss from './utility/ConverBoarToCss';
 import './App.css';
 
 function App() {
   const [currentColor, setCurrentColor] = useState('#000000');
   const [currentTool, setCurrentTool] = useState(null);
-  const [history, setHistory] = useState([]);
+  const [history, setHistory] = useState(["#000000"]);
   const [board, setBoard] = useState([]);
   const [sizeBorad, setSizeBoard] = useState(8);
+  const [spriteComponent, setSpriteComponent] = useState([]);
+
+  useEffect(()=> {
+    console.log(spriteComponent);
+  },[spriteComponent]);
 
   // canvas
   const getBoard = newboard => {
     setBoard(newboard);
+    // console.log(board);
   }
 
   // hitorial
@@ -49,6 +56,14 @@ function App() {
     setSizeBoard(newsize);
   }
 
+  // convertir el board a css
+  const convertBoardToCSs = () => {
+    const convertBoard = new ConvertBoardToCss(board);
+    const measure = convertBoard.MESURES.REM;
+    const shadowsList = convertBoard.getComponent(measure);
+    setSpriteComponent(shadowsList);
+  }
+
   return (
     <>
       {/* Header */}
@@ -62,9 +77,6 @@ function App() {
 
         {/* Controls */}
         <aside>
-          {/* Form size */}
-          <CanvasControls onApply={onApply} />
-
           {/* tools and current color */}
           <div className='flex justify-left align-center p-2 gap-2'>
             <ToolButton type={TOOLS.PEN} active={currentTool === TOOLS.PEN} cb={() => setCurrentTool(TOOLS.PEN)} />
@@ -74,6 +86,10 @@ function App() {
             <ColorButton color={currentColor} click={() => { }} />
             <input type="color" onChange={handleClickColor} />
           </div>
+          
+          {/* Form size */}
+          <CanvasControls onApply={onApply} />
+          <button className="bg-indigo-700 text-white px-4 py-2" onClick={convertBoardToCSs}>print board</button>
 
           {/* History */}
           <History items={history} clear={clearColorHistory} updateColor={updateCurrentColor} />

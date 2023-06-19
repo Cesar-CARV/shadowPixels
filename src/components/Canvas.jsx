@@ -23,6 +23,8 @@ function Canvas({size, color, tool, getBoard }) {
         if (!pixelCanvas) return;
 
         pixelCanvas.resizeBoard(sizeBoard);
+        const canvasBoard = pixelCanvas.getBoard();
+        getCanvasBoard(canvasBoard);
     },[sizeBoard]);
 
     // modificar el tamaño del canvas y redibujar el board
