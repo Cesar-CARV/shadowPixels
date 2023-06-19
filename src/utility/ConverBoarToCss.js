@@ -25,20 +25,23 @@ class ConvertBoardToCss {
     }
 
     #getSpriteCss = (measure, shadows) => {
-        return `width: 1${measure};\nheight: 1${measure};\nbackground-color: ${this.board[0][0]};\nbox-shadow: ${shadows.join(',')};`;
+        return `.sprite {\n\twidth: 1${measure};\n\theight: 1${measure};\n\tbackground-color: ${this.board[0][0]};\n\tbox-shadow: ${shadows.join(',')};\n}`;
     }
 
     #getSpriteContainerCss = measure => {
-        return `position: relative\nwidth: ${this.board.length + measure}\nheight: ${this.board.length + measure}`;
+        return `.sprite-container {\n\tposition: relative\n\twidth: ${this.board.length + measure}\n\theight: ${this.board.length + measure}\n}`;
     }
 
     getComponent = measure => {
+        if (this.#convertBoardToList().filter(pixel => pixel.color !== "transparent").length === 0) {
+            return { html: "", container: "", sprite: "" };
+        }
+
         const shadows = this.#getShadows(measure);
-        return [this.#getSpriteContainerCss(measure),this.#getSpriteCss(measure, shadows)];
-        // return (`
-        //     <>
-        //     <>
-        // `)
+        const component = `<div class="sprite-container"><div class="sprite"></div></div>`;
+        const classSpriteContainer = this.#getSpriteContainerCss(measure);
+        const classSprite = this.#getSpriteCss(measure, shadows);
+        return { html: component, container: classSpriteContainer, sprite: classSprite };
     }
 }
 

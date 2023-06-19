@@ -7,6 +7,7 @@ import ColorButton from './components/ColorButton';
 import CanvasControls from './components/CanvasControls';
 import TOOLS from './utility/Tools';
 import ConvertBoardToCss from './utility/ConverBoarToCss';
+import CodeBlock from './components/CodeBlock';
 import './App.css';
 
 function App() {
@@ -18,7 +19,7 @@ function App() {
   const [spriteComponent, setSpriteComponent] = useState([]);
 
   useEffect(()=> {
-    console.log(spriteComponent[0], "\n\n", spriteComponent[1]);
+    console.log(`${spriteComponent.html}\n${spriteComponent.container}\n${spriteComponent.sprite}`);
   },[spriteComponent]);
 
   // canvas
@@ -96,8 +97,10 @@ function App() {
         </aside>
 
         {/* Code css */}
-        <section>
-
+        <section className='flex flex-wrap gap-4'>
+          <CodeBlock code={spriteComponent.html}/>
+          <CodeBlock code={spriteComponent.container}/>
+          <CodeBlock code={spriteComponent.sprite}/>
         </section>
       </main>
 
