@@ -2,7 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import PixelCanvas from "../utility/PixelCanvas.js";
 import TOOLS from "../utility/Tools.js";
 
-function Canvas({size, color, tool, getBoard }) {
+function Canvas({ size, color, tool, getBoard }) {
     const sizeBoard = size;
     const currentTool = tool;
     const currentColor = color;
@@ -25,7 +25,7 @@ function Canvas({size, color, tool, getBoard }) {
         pixelCanvas.resizeBoard(sizeBoard);
         const canvasBoard = pixelCanvas.getBoard();
         getCanvasBoard(canvasBoard);
-    },[sizeBoard]);
+    }, [sizeBoard]);
 
     // modificar el tamaño del canvas y redibujar el board
     useEffect(() => {
@@ -42,7 +42,7 @@ function Canvas({size, color, tool, getBoard }) {
 
         const canvasBoard = pixelCanvas.getBoard();
         getCanvasBoard(canvasBoard);
-    },[paint]);
+    }, [paint]);
 
     // cada que se eleccionar una herramienta se actualiza la herramienta en el pixelCanvas
     useEffect(() => {
@@ -81,7 +81,7 @@ function Canvas({size, color, tool, getBoard }) {
     }
 
     return (
-        <section>
+        <section className="containe-canvas flex-grow max-w-fit">
             <canvas
                 ref={canvasRef}
                 onMouseMove={handleMouseMove}
@@ -93,26 +93,21 @@ function Canvas({size, color, tool, getBoard }) {
                 className={`
                     border-2 border-gray-500 rounded-sm 
                     object-none object-left-top 
-                    w-full max-w-lg
+                    w-96 h-96
                     ${currentTool === TOOLS.PEN ? "cursor-cell" : ""}
                     ${currentTool === TOOLS.ERASER ? "cursor-no-drop" : ""}
                     ${currentTool === TOOLS.HAND ? "cursor-move" : ""}
                     ${currentTool === TOOLS.LENS ? "cursor-zoom-in" : ""}
                 `}
-                width={400}
-                height={400}
+                width={540}
+                height={540}
             >
                 Tu navegador no soporta canvas
             </canvas>
             {/* canvas info */}
-            <section>
-                <div>
-
-                </div>
-                <div>
-                    <span>X: {pointer.x}, Y: {pointer.y}</span>
-                </div>
-            </section>
+            <div>
+                <span>X: {pointer.x}, Y: {pointer.y}</span>
+            </div>
         </section>
     )
 }

@@ -2,7 +2,19 @@ body{
     scroll-behavior: smooth;
 }
 
-canvas {
+
+.containe-canvas {
+    min-width: 24rem;
+}
+
+#canvas {
     background-image: url('./assets/canvasBackground-light.png');
     background-size: cover;
+}
+
+@media (min-width: 1024px) {
+    #canvas {
+        width: 540px;
+        height: 540px;
+    }
 }

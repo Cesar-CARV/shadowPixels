@@ -73,35 +73,84 @@ function App() {
 
       {/* Main */}
       <main>
+        <article
+          className='flex px-8 py-2 gap-4 flex-col justify-center items-center md:flex-row md:items-start'
+        >
+          {/* Canvas */}
+          <Canvas
+            size={sizeBorad}
+            color={currentColor}
+            tool={currentTool}
+            getBoard={getBoard}
+          />
 
-        {/* Canvas */}
-        <Canvas size={sizeBorad} color={currentColor} tool={currentTool} getBoard={getBoard} />
+          {/* Controls */}
+          <aside className='flex-grow'>
+            {/* tools and current color */}
+            <div className='flex justify-left align-center p-2 gap-2'>
+              <ToolButton
+                type={TOOLS.PEN}
+                active={currentTool === TOOLS.PEN}
+                cb={() => setCurrentTool(TOOLS.PEN)}
+              />
+              <ToolButton
+                type={TOOLS.ERASER}
+                active={currentTool === TOOLS.ERASER}
+                cb={() => setCurrentTool(TOOLS.ERASER)}
+              />
+              <ToolButton
+                type={TOOLS.HAND}
+                active={currentTool === TOOLS.HAND}
+                cb={() => setCurrentTool(TOOLS.HAND)}
+              />
+              <ToolButton
+                type={TOOLS.LENS}
+                active={currentTool === TOOLS.LENS}
+                cb={() => setCurrentTool(TOOLS.LENS)}
+              />
+              <ColorButton
+                color={currentColor}
+                click={() => { }}
+                showHex={true}
+              />
+              <input type="color" onChange={handleClickColor} />
+            </div>
 
-        {/* Controls */}
-        <aside>
-          {/* tools and current color */}
-          <div className='flex justify-left align-center p-2 gap-2'>
-            <ToolButton type={TOOLS.PEN} active={currentTool === TOOLS.PEN} cb={() => setCurrentTool(TOOLS.PEN)} />
-            <ToolButton type={TOOLS.ERASER} active={currentTool === TOOLS.ERASER} cb={() => setCurrentTool(TOOLS.ERASER)} />
-            <ToolButton type={TOOLS.HAND} active={currentTool === TOOLS.HAND} cb={() => setCurrentTool(TOOLS.HAND)} />
-            <ToolButton type={TOOLS.LENS} active={currentTool === TOOLS.LENS} cb={() => setCurrentTool(TOOLS.LENS)} />
-            <ColorButton color={currentColor} click={() => { }} showHex={true} />
-            <input type="color" onChange={handleClickColor} />
-          </div>
-          
-          {/* Form size */}
-          <CanvasControls changeSize={changeSize} changeMeasure={changeMeasure}/>
-          <button className="bg-indigo-700 text-white px-4 py-2" onClick={convertBoardToCSs}>Get Code</button>
+            {/* Form size */}
+            <CanvasControls
+              changeSize={changeSize}
+              changeMeasure={changeMeasure}
+            />
+            <button
+              className="bg-indigo-700 text-white px-4 py-2"
+              onClick={convertBoardToCSs}
+            >
+              Get Code
+            </button>
 
-          {/* History */}
-          <History items={history} clear={clearColorHistory} updateColor={updateCurrentColor} />
-        </aside>
+            {/* History */}
+            <History
+              items={history}
+              clear={clearColorHistory}
+              updateColor={updateCurrentColor}
+            />
+          </aside>
+        </article>
 
         {/* Code css */}
         <article className='flex flex-wrap gap-2'>
-          <CodeBlock code={spriteComponent.html} title={"HMTL"}/>
-          <CodeBlock code={spriteComponent.container} title={"CSS Container"}/>
-          <CodeBlock code={spriteComponent.sprite} title={"CSS Sprite"}/>
+          <CodeBlock
+            code={spriteComponent.html}
+            title={"HMTL"}
+          />
+          <CodeBlock
+            code={spriteComponent.container}
+            title={"CSS Container"}
+          />
+          <CodeBlock
+            code={spriteComponent.sprite}
+            title={"CSS Sprite"}
+          />
         </article>
       </main>
 
