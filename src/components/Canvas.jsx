@@ -81,7 +81,7 @@ function Canvas({ size, color, tool, getBoard }) {
     }
 
     return (
-        <section className="containe-canvas flex-grow max-w-fit">
+        <section className="flex-grow max-w-fit">
             <canvas
                 ref={canvasRef}
                 onMouseMove={handleMouseMove}
@@ -91,9 +91,9 @@ function Canvas({ size, color, tool, getBoard }) {
                 onContextMenu={handleContextMenu}
                 id="canvas"
                 className={`
-                    border-2 border-gray-500 rounded-sm 
+                    border-2 border-slate-800 rounded-sm 
                     object-none object-left-top 
-                    w-96 h-96
+                    w-96 h-96 lg:w-[540px] lg:h-[540px]
                     ${currentTool === TOOLS.PEN ? "cursor-cell" : ""}
                     ${currentTool === TOOLS.ERASER ? "cursor-no-drop" : ""}
                     ${currentTool === TOOLS.HAND ? "cursor-move" : ""}

@@ -14,7 +14,7 @@ function History({ items, clear, updateColor }) {
                     <i className='bx bxs-x-circle'></i>
                 </button>
             </header>
-            <ul>
+            <ul className="flex h-20 overflow-y-scroll w-full flex-wrap gap-1">
                 {history.map((item, i) => (
                     <li key={i}>
                         <ColorButton color={item} click={handleUpdateColorClick} showHex={false}/>

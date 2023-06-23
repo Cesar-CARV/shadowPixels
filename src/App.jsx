@@ -85,9 +85,9 @@ function App() {
           />
 
           {/* Controls */}
-          <aside className='flex-grow'>
+          <aside className='bg-gray-900 p-4 w-96 h-96 lg:w-auto lg:h-auto'>
             {/* tools and current color */}
-            <div className='flex justify-left align-center p-2 gap-2'>
+            <section className='flex flex-wrap justify-left align-center gap-2'>
               <ToolButton
                 type={TOOLS.PEN}
                 active={currentTool === TOOLS.PEN}
@@ -110,11 +110,17 @@ function App() {
               />
               <ColorButton
                 color={currentColor}
-                click={() => { }}
+                click={handleClickColor}
                 showHex={true}
               />
-              <input type="color" onChange={handleClickColor} />
-            </div>
+            </section>
+            
+            {/* History */}
+            <History
+              items={history}
+              clear={clearColorHistory}
+              updateColor={updateCurrentColor}
+            />
 
             {/* Form size */}
             <CanvasControls
@@ -122,18 +128,12 @@ function App() {
               changeMeasure={changeMeasure}
             />
             <button
-              className="bg-indigo-700 text-white px-4 py-2"
+              className="bg-teal-500 text-slate-950 px-4 py-2"
               onClick={convertBoardToCSs}
             >
               Get Code
             </button>
 
-            {/* History */}
-            <History
-              items={history}
-              clear={clearColorHistory}
-              updateColor={updateCurrentColor}
-            />
           </aside>
         </article>
 
