@@ -8,13 +8,13 @@ function History({ items, clear, updateColor }) {
 
     return (
         <section>
-            <header>
+            <header className="flex justify-between px-4 py-2 bg-gray-800">
                 <h3>Color history</h3>
                 <button onClick={handleClearClick}>
                     <i className='bx bxs-x-circle'></i>
                 </button>
             </header>
-            <ul className="flex h-20 overflow-y-scroll w-full flex-wrap gap-1">
+            <ul className="flex h-20 w-full p-2 overflow-y-scroll flex-wrap gap-1 bg-slate-950">
                 {history.map((item, i) => (
                     <li key={i}>
                         <ColorButton color={item} click={handleUpdateColorClick} showHex={false}/>

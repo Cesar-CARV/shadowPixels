@@ -3,8 +3,11 @@ import Header from './components/Header';
 import Canvas from './components/Canvas';
 import History from './components/History';
 import ToolButton from './components/ToolButton';
+import ToolButtons from './components/ToolButtons';
 import ColorButton from './components/ColorButton';
 import CanvasControls from './components/CanvasControls';
+import ResizeCanvasForm from './components/ResizeCanvasForm';
+import MeasuresOps from './components/MeasuresOps';
 import ConvertBoardToCss from './utility/ConverBoarToCss';
 import CodeBlock from './components/CodeBlock';
 import TOOLS from './utility/Tools';
@@ -84,37 +87,15 @@ function App() {
             getBoard={getBoard}
           />
 
-          {/* Controls */}
-          <aside className='bg-gray-900 p-4 w-96 h-96 lg:w-auto lg:h-auto'>
+          <CanvasControls convertBoardToCSs={convertBoardToCSs}>
+
             {/* tools and current color */}
-            <section className='flex flex-wrap justify-left align-center gap-2'>
-              <ToolButton
-                type={TOOLS.PEN}
-                active={currentTool === TOOLS.PEN}
-                cb={() => setCurrentTool(TOOLS.PEN)}
-              />
-              <ToolButton
-                type={TOOLS.ERASER}
-                active={currentTool === TOOLS.ERASER}
-                cb={() => setCurrentTool(TOOLS.ERASER)}
-              />
-              <ToolButton
-                type={TOOLS.HAND}
-                active={currentTool === TOOLS.HAND}
-                cb={() => setCurrentTool(TOOLS.HAND)}
-              />
-              <ToolButton
-                type={TOOLS.LENS}
-                active={currentTool === TOOLS.LENS}
-                cb={() => setCurrentTool(TOOLS.LENS)}
-              />
-              <ColorButton
-                color={currentColor}
-                click={handleClickColor}
-                showHex={true}
-              />
-            </section>
-            
+            <ToolButtons
+              currentTool={currentTool}
+              currentColor={currentColor}
+              setCurrentTool={setCurrentTool}
+              handleClickColor={handleClickColor}
+            />
             {/* History */}
             <History
               items={history}
@@ -123,18 +104,10 @@ function App() {
             />
 
             {/* Form size */}
-            <CanvasControls
-              changeSize={changeSize}
-              changeMeasure={changeMeasure}
-            />
-            <button
-              className="bg-teal-500 text-slate-950 px-4 py-2"
-              onClick={convertBoardToCSs}
-            >
-              Get Code
-            </button>
-
-          </aside>
+            <ResizeCanvasForm changeSize={changeSize} />
+            {/* Measure options */}
+            <MeasuresOps changeMeasure={changeMeasure} />
+          </CanvasControls>
         </article>
 
         {/* Code css */}
