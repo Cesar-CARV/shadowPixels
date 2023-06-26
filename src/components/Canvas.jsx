@@ -105,7 +105,7 @@ function Canvas({ size, color, tool, getBoard }) {
                 Tu navegador no soporta canvas
             </canvas>
             {/* canvas info */}
-            <div>
+            <div className="px-2">
                 <span>X: {pointer.x}, Y: {pointer.y}</span>
             </div>
         </section>

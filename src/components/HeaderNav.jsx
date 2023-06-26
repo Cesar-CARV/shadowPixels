@@ -4,7 +4,7 @@ function HeaderNav() {
             <ul className="flex items-center gap-4">
                 <li>
                     <a
-                        href="http://"
+                        href="https://github.com/Cesar-CARV"
                         target="_blank"
                         rel="noopener noreferrer"
                     >
@@ -13,7 +13,7 @@ function HeaderNav() {
                 </li>
                 <li>
                     <a
-                        href="http://"
+                        href="https://www.linkedin.com/in/cesar-agustin-ruiz-vera-edt/"
                         target="_blank"
                         rel="noopener noreferrer"
                     >

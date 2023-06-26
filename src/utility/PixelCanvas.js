@@ -68,8 +68,6 @@ class PixelCanvas {
     // son las cordenadas del board.
     // se debe delvolver la newva posicion del cursor para que se actualize en el componente.
     updateCursorPoint = (x, y) => {
-        // const newCursorX = Math.floor(((x - this.offsetPoint.x * this.zoom) / this.width) * (this.size / this.zoom));
-        // const newCursorY = Math.floor(((y - this.offsetPoint.y * this.zoom) / this.width) * (this.size / this.zoom));
         const newCursorX = Math.floor(((x - this.offsetPoint.x) / this.width) * this.size);
         const newCursorY = Math.floor(((y - this.offsetPoint.y) / this.width) * this.size);
 
@@ -124,7 +122,6 @@ class PixelCanvas {
         }
 
         this.drawBoard();
-        //console.log(this.board);
     }
 
     drawBoard = () => {
@@ -132,7 +129,7 @@ class PixelCanvas {
 
         for (let y = 0; y < this.board.length; y++) {
             for (let x = 0; x < this.board[y].length; x++) {
-                this.ctx.strokeStyle = "#36363623";
+                this.ctx.strokeStyle = "#36363660";
                 this.ctx.strokeRect(
                     this.offsetPoint.x + (x * this.box),
                     this.offsetPoint.y + (y * this.box),
@@ -147,10 +144,6 @@ class PixelCanvas {
                 );
             }
         }
-        // this.ctx.fillStyle = 'green';
-        // this.ctx.fillRect(this.handToolPoint.x * this.box, this.handToolPoint.y * this.box, 4, 4);
-        // this.ctx.fillStyle = '#ffffff33';
-        // this.ctx.fillRect(this.cursorPoint.x * this.box, this.cursorPoint.y * this.box, this.box, this.box);
     }
 
 }

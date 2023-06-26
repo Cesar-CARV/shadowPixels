@@ -2,15 +2,13 @@ import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import Canvas from './components/Canvas';
 import History from './components/History';
-import ToolButton from './components/ToolButton';
 import ToolButtons from './components/ToolButtons';
-import ColorButton from './components/ColorButton';
 import CanvasControls from './components/CanvasControls';
 import ResizeCanvasForm from './components/ResizeCanvasForm';
 import MeasuresOps from './components/MeasuresOps';
 import ConvertBoardToCss from './utility/ConverBoarToCss';
 import CodeBlock from './components/CodeBlock';
-import TOOLS from './utility/Tools';
+import Footer from './components/Footer';
 import MEASURES from './utility/Measures';
 import './App.css';
 
@@ -73,11 +71,10 @@ function App() {
     <>
       {/* Header */}
       <Header />
-
       {/* Main */}
       <main>
         <article
-          className='flex px-8 py-2 gap-4 flex-col justify-center items-center md:flex-row md:items-start'
+          className='flex px-8 py-2 gap-4 flex-col justify-start items-center md:flex-row md:items-start'
         >
           {/* Canvas */}
           <Canvas
@@ -88,7 +85,6 @@ function App() {
           />
 
           <CanvasControls convertBoardToCSs={convertBoardToCSs}>
-
             {/* tools and current color */}
             <ToolButtons
               currentTool={currentTool}
@@ -102,7 +98,6 @@ function App() {
               clear={clearColorHistory}
               updateColor={updateCurrentColor}
             />
-
             {/* Form size */}
             <ResizeCanvasForm changeSize={changeSize} />
             {/* Measure options */}
@@ -111,7 +106,7 @@ function App() {
         </article>
 
         {/* Code css */}
-        <article className='flex flex-wrap gap-2'>
+        <article className='flex flex-wrap gap-2 p-8'>
           <CodeBlock
             code={spriteComponent.html}
             title={"HMTL"}
@@ -128,8 +123,7 @@ function App() {
       </main>
 
       {/* Footer */}
-      <footer>
-      </footer>
+      <Footer></Footer>
     </>
   )
 }
