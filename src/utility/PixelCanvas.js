@@ -100,7 +100,12 @@ class PixelCanvas {
         }
         else if (this.currentTool === this.TOOLS.LENS) {
             e.preventDefault();
-            const zoomInOut = e.button === 0 ? -1 : 1; // 0 = LEFT, 1 = MIDLE, 2 = RIGHT | -1 = in, 1 = out
+            const zoomInOut = -1; //-1 = in, 1 = out
+            this.zoomBoard(zoomInOut);
+        }
+        else if (this.currentTool === this.TOOLS.LENSOUT) {
+            e.preventDefault();
+            const zoomInOut = 1; //-1 = in, 1 = out
             this.zoomBoard(zoomInOut);
         }
         else if (this.currentTool === this.TOOLS.HAND) {

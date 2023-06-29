@@ -25,6 +25,11 @@ function ToolButtons({currentTool, currentColor, setCurrentTool, handleClickColo
                 active={currentTool === TOOLS.LENS}
                 cb={() => setCurrentTool(TOOLS.LENS)}
             />
+            <ToolButton
+                type={TOOLS.LENSOUT}
+                active={currentTool === TOOLS.LENSOUT}
+                cb={() => setCurrentTool(TOOLS.LENSOUT)}
+            />
             <ColorButton
                 color={currentColor}
                 click={handleClickColor}
