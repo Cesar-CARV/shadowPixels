@@ -134,7 +134,7 @@ class PixelCanvas {
 
         for (let y = 0; y < this.board.length; y++) {
             for (let x = 0; x < this.board[y].length; x++) {
-                this.ctx.strokeStyle = "#36363660";
+                this.ctx.strokeStyle = "#78787860";
                 this.ctx.strokeRect(
                     this.offsetPoint.x + (x * this.box),
                     this.offsetPoint.y + (y * this.box),

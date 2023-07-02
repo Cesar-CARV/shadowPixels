@@ -4,7 +4,7 @@ function ColorButton({ color, click, showHex }) {
             {
                 showHex &&
                 <input
-                    className='w-10 h-10 border-slate-800 cursor-pointer'
+                    className='w-10 h-10 border-slate-800 cursor-pointer border'
                     type="color"
                     onChange={click}
                     title={color}
@@ -15,7 +15,7 @@ function ColorButton({ color, click, showHex }) {
             {
                 !showHex &&
                 <button
-                    className={'w-10 h-10 px-4 py-2 font-mono border-slate-300'}
+                    className={'w-10 h-10 px-4 py-2 font-mono border border-slate-400'}
                     onClick={() => click(color)}
                     style={{ backgroundColor: color }}
                     title={color}
