@@ -93,7 +93,7 @@ function Canvas({ size, color, tool, getBoard }) {
                 className={`
                     border-2 border-slate-800 rounded-sm 
                     object-none object-left-top 
-                    w-96 h-96 lg:w-[540px] lg:h-[540px]
+                    w-96 h-96 md:w-[480px] md:h-[480px] lg:w-[540px] lg:h-[540px]
                     ${currentTool === TOOLS.PEN ? "cursor-cell" : ""}
                     ${currentTool === TOOLS.ERASER ? "cursor-no-drop" : ""}
                     ${currentTool === TOOLS.HAND ? "cursor-move" : ""}

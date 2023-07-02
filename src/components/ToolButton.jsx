@@ -13,8 +13,8 @@ function ToolButton({ type, active, cb }) {
             {typeButton === TOOLS.PEN ? <i className='bx bxs-pencil'></i> : <></>}
             {typeButton === TOOLS.ERASER ? <i className='bx bxs-eraser'></i> : <></>}
             {typeButton === TOOLS.HAND ? <i className='bx bxs-hand'></i> : <></>}
-            {typeButton === TOOLS.LENS ? <i class='bx bx-zoom-in'></i> : <></>}
-            {typeButton === TOOLS.LENSOUT ? <i class='bx bx-zoom-out'></i> : <></>}
+            {typeButton === TOOLS.LENS ? <i className='bx bx-zoom-in'></i> : <></>}
+            {typeButton === TOOLS.LENSOUT ? <i className='bx bx-zoom-out'></i> : <></>}
         </button>
     )
 }
