@@ -7,6 +7,7 @@ function ColorButton({ color, click, showHex }) {
                     className='w-10 h-10 border-slate-800 cursor-pointer border'
                     type="color"
                     onChange={click}
+                    onBlur={click}
                     title={color}
                     value={color}
                 />

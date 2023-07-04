@@ -44,6 +44,8 @@ function App() {
   const handleClickColor = e => {
     const newCurrentColor = e.target.value;
     setCurrentColor(newCurrentColor);
+
+    if (e.type === 'change') return;
     addColorToHistory(newCurrentColor);
   }
 
