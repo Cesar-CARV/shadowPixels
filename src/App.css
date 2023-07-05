@@ -3,6 +3,6 @@ body{
 }
 
 #canvas {
-    background-image: url('./assets/canvasBackground.png');
+    background-image: url('./assets/canvasBackground-light.png');
     background-size: cover;
 }

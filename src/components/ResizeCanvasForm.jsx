@@ -30,7 +30,7 @@ function ResizeCanvasForm({changeSize}) {
                 Size:
             </label>
             <input
-                className="flex-grow w-8 bg-slate-800 text-white px-3 py-1 m-2 h-10"
+                className="flex-grow w-8 bg-zinc-700 text-white px-3 py-1 m-2 h-10 rounded-md"
                 type="text"
                 placeholder='8'
                 name="size"
@@ -39,7 +39,7 @@ function ResizeCanvasForm({changeSize}) {
                 onChange={handleChange}
                 value={sizeValue}
             />
-            <button type="submit" className="bg-teal-500 text-slate-950 px-4 py-2 h-10">
+            <button type="submit" className="bg-zinc-50 text-slate-950 px-4 py-2 h-10 rounded-md">
                 <span>Apply</span>
                 <i className='bx bx-check'></i>
             </button>

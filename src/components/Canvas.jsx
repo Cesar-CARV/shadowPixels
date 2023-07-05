@@ -91,7 +91,7 @@ function Canvas({ size, color, tool, getBoard }) {
                 onContextMenu={handleContextMenu}
                 id="canvas"
                 className={`
-                    border-2 border-slate-800 rounded-sm 
+                    border-2 border-zinc-950 rounded-lg 
                     object-none object-left-top 
                     w-96 h-96 md:w-[480px] md:h-[480px] lg:w-[540px] lg:h-[540px]
                     ${currentTool === TOOLS.PEN ? "cursor-cell" : ""}

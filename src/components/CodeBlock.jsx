@@ -12,13 +12,13 @@ function CodeBlock({ code, title }) {
 
 
     return (
-        <section className="flex-grow basis-96 max-w-full h-auto bg-gray-900 text-white" onClick={handleClick}>
-            <header className="p-4 flex justify-between items-center bg-gray-700">
+        <section className="flex-grow basis-96 max-w-full h-auto bg-zinc-900 text-white rounded-lg overflow-hidden" onClick={handleClick}>
+            <header className="p-4 flex justify-between items-center bg-zinc-700">
                 <h4>{title}</h4>
                 <button onClick={handleClick}>
                     {
                         copied ?
-                            <div className="text-teal-500"><span>Copied</span> <i className='bx bxs-check-square'></i></div>
+                            <div className="text-blue-500"><span>Copied</span> <i className='bx bxs-check-square'></i></div>
                             :
                             <i className='bx bx-clipboard'></i>
                     }

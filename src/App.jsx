@@ -11,10 +11,11 @@ import CodeBlock from './components/CodeBlock';
 import Footer from './components/Footer';
 import MEASURES from './utility/Measures';
 import './App.css';
+import TOOLS from './utility/Tools';
 
 function App() {
   const [currentColor, setCurrentColor] = useState('#000000');
-  const [currentTool, setCurrentTool] = useState(null);
+  const [currentTool, setCurrentTool] = useState(TOOLS.PEN);
   const [history, setHistory] = useState(["#000000"]);
   const [board, setBoard] = useState([]);
   const [sizeBorad, setSizeBoard] = useState(8);
@@ -64,9 +65,9 @@ function App() {
   // convertir el board a css
   const convertBoardToCSs = () => {
     const convertBoard = new ConvertBoardToCss(board);
-    // const measure = convertBoard.MESURES.EM;
     const shadowsList = convertBoard.getComponent(measure);
     setSpriteComponent(shadowsList);
+    alert("Code was generated");
   }
 
   return (

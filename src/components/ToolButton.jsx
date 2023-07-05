@@ -7,7 +7,7 @@ function ToolButton({ type, active, cb }) {
 
     return (
         <button
-            className={`${buttonActive ? "bg-teal-500" : "bg-slate-800"} ${buttonActive ? "text-slate-950" : "text-white"} px-4 py-2 h-10 `}
+            className={`${buttonActive ? "bg-blue-500" : "bg-zinc-50"} ${buttonActive ? "text-zinc-50" : "text-zinc-800"} px-4 py-2 h-10 rounded-md`}
             onClick={callback}
         >
             {typeButton === TOOLS.PEN ? <i className='bx bxs-pencil'></i> : <></>}

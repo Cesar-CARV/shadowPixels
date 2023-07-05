@@ -3,10 +3,10 @@ import MEASURES from '../utility/Measures';
 
 function CanvasControls({ children, convertBoardToCSs }) {
     return (
-        <section className='bg-gray-900 w-full h-auto max-w-max flex flex-col gap-2 p-2'>
+        <section className='bg-zinc-950 w-full h-auto max-w-max flex flex-col gap-2 p-4 rounded-lg'>
             {children}
             <button
-                className="bg-teal-500 text-slate-950 px-4 py-2"
+                className="bg-zinc-50 text-slate-950 px-4 py-2 rounded-md"
                 onClick={convertBoardToCSs}
             >
                 <span>Get Code</span>

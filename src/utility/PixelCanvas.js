@@ -132,8 +132,14 @@ class PixelCanvas {
     drawBoard = () => {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
 
+        // oscurecer el canvas menos el board
+        this.ctx.fillStyle = "#00000080";
+        this.ctx.fillRect(0,0, this.canvas.width, this.canvas.width);
+        this.ctx.clearRect(this.offsetPoint.x, this.offsetPoint.y, this.box * this.size, this.box * this.size);
+
         for (let y = 0; y < this.board.length; y++) {
             for (let x = 0; x < this.board[y].length; x++) {
+                // dibujar cuadricula
                 this.ctx.strokeStyle = "#ffffff80";
                 this.ctx.strokeRect(
                     this.offsetPoint.x + (x * this.box),
@@ -141,6 +147,7 @@ class PixelCanvas {
                     this.box, this.box
                 );
 
+                // dibujar los pixeles
                 this.ctx.fillStyle = this.board[y][x];
                 this.ctx.fillRect(
                     this.offsetPoint.x + (x * this.box),
